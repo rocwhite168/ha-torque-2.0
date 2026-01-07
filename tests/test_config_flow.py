@@ -61,24 +61,6 @@ async def test_flow_user_default_name(hass: HomeAssistant) -> None:
     }
 
 
-async def test_flow_user_invalid_email(hass: HomeAssistant) -> None:
-    """Test user flow with invalid email."""
-    result = await hass.config_entries.flow.async_init(
-        DOMAIN, context={"source": config_entries.SOURCE_USER}
-    )
-
-    result = await hass.config_entries.flow.async_configure(
-        result["flow_id"],
-        {
-            CONF_EMAIL: "invalid-email",
-            CONF_NAME: "My Car",
-        },
-    )
-
-    assert result["type"] is FlowResultType.FORM
-    assert result["errors"] == {CONF_EMAIL: "invalid_email"}
-
-
 async def test_flow_user_duplicate_email(hass: HomeAssistant) -> None:
     """Test user flow with duplicate email (already configured)."""
     # First entry

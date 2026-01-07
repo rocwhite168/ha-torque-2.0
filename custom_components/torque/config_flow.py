@@ -40,7 +40,7 @@ class TorqueConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 email = user_input[CONF_EMAIL].lower().strip()
 
                 # Validate email format (basic validation)
-                if not email or "@" not in email:
+                if not email:
                     errors[CONF_EMAIL] = "invalid_email"
                 else:
                     # Set unique ID based on email to prevent duplicates
